@@ -1,0 +1,26 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+nav {
+    width: 100%;
+    display: flex;
+}
+
+ul li.nav-link.active a {
+    color: white;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.h-screen {
+    height: 100vh;
+}
