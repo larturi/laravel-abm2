@@ -44,7 +44,7 @@ class MessagesController extends Controller
             'mensaje' => $request->input('mensaje'),
         ]);
 
-        return redirect()->route('mensajes.create')->with('info', 'Hemos recbido tu mensaje');
+        return redirect()->route('mensajes.create')->with('info', 'Hemos recibido tu mensaje');
     }
 
     public function show($id)

@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mi Sitio</title>
+<html lang="es">
 
-    <link rel="stylesheet" href="/css/app.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Mi Sitio</title>
 
-<body>
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <script src="{{ mix('js/app.js') }}" defer></script>
+    </head>
 
-    <div id="app" class="d-flex flex-column h-screen  justify-content-between">
+    <body>
 
-        <header>
-            @include('partials.navbar')
-        </header>
+        <div id="app" class="d-flex flex-column h-screen  justify-content-between">
 
-        <main class="py-4">
-            @yield('contenido')
-        </main>
+            <header>
+                @include('partials.navbar')
+            </header>
 
-        <footer class="bg-white text-black-50 text-center py-3 shadow">
-            My sitio - Copyrigth {{date('Y')}}
-        </footer>
+            <main class="py-4">
+                @yield('contenido')
+            </main>
 
+            <footer class="bg-white text-black-50 text-center py-3 shadow">
+                My sitio - Copyrigth {{date('Y')}}
+            </footer>
 
-    </div>
+        </div>
 
-</body>
+    </body>
 
 </html>
