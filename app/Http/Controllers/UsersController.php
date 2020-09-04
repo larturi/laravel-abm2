@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
 use App\User;
@@ -23,12 +24,15 @@ class UsersController extends Controller
 
     public function create()
     {
-        //
+        $roles = Role::pluck('display_name', 'id');
+        return view('users.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = User::create($request->all());
+        $user->roles()->attach($request->roles);
+        return redirect()->route('usuarios.index');
     }
 
 
@@ -58,9 +62,9 @@ class UsersController extends Controller
 
         $this->authorize('update', $user);
 
-        $user->update($request->all());
+        $user->update($request->only('name', 'email'));
 
-        $user->roles()->attach($request->roles);
+        $user->roles()->sync($request->roles);
 
         return back()->with('info', 'Usuario actualizado');
     }

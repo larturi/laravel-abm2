@@ -6,6 +6,8 @@
     <div class="col">
         <h1 class="display-4 text-primary">Usuarios</h1>
 
+        <a class="btn btn-success float-right mb-3" href="{{ route('usuarios.create') }}">Crear nuevo usuario</a>
+
         <table class="table table-responsive-sm">
             <thead>
                 <tr>
