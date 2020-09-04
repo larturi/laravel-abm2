@@ -8,7 +8,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav nav-pills">
+        <ul class="nav">
             <li class="nav-link {{ request()->is('home') ? 'active' : '' }}">
                 <a href="{{ route('home') }}">Inicio</a>
             </li>
@@ -21,24 +21,57 @@
                 <a href="{{ route('mensajes.create') }}">Contacto</a>
             </li>
 
-            <li class="nav-link {{ ( request()->is('mensajes') || request()->is('mensajes/*/edit') ) ? 'active' : '' }}">
-                <a href="{{ route('mensajes.index') }}">Mensajes</a>
-            </li>
+            @if (auth()->check())
+                <li class="nav-link {{ ( request()->is('mensajes') || request()->is('mensajes/*/edit') ) ? 'active' : '' }}">
+                    <a href="{{ route('mensajes.index') }}">Mensajes</a>
+                </li>
+
+                @if (auth()->user()->hasRoles(['admin']))
+                    <li class="nav-link {{ ( request()->is('usuarios*') || request()->is('mensajes/*/edit') ) ? 'active' : '' }}">
+                        <a href="{{ route('usuarios.index') }}">Usuarios</a>
+                    </li>
+                @endif
+
+            @endif
+
+        </ul>
+
+        <ul class="nav navbar-nav right-align">
 
             @if(auth()->guest())
-                <li class="nav-link {{ request()->is('mensajes/login') ? 'active' : '' }}">
-                    <a href="/login">Login</a>
+
+                <li class="nav-link {{ ( request()->is('login') ) ? 'active' : '' }}">
+                    <a href="{{ route('login') }}">Login</a>
                 </li>
-                @else
-                    <li>
-                        <a class="nav-link"
-                        href="#" onclick="event.preventDefault();
+
+            @else
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/login" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ auth()->user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item"
+                          href="#" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     Logout
                         </a>
-                    </li>
+
+                        <a class="dropdown-item" href="/usuarios/{{ auth()->id() }}/edit">Mi cuenta</a>
+
+                    </div>
+
+                </li>
+
             @endif
+
         </ul>
+
+
+
+
     </div>
 </nav>
 

@@ -10974,7 +10974,8 @@ nav {
 }
 
 ul li.nav-link.active a {
-  color: white;
+  color: #138a27;
+  font-weight: 600;
 }
 
 .error {
@@ -10984,5 +10985,14 @@ ul li.nav-link.active a {
 
 .h-screen {
   height: 100vh;
+}
+
+footer {
+  position: fixed;
+  height: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
 }
 

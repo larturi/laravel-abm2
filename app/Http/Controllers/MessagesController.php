@@ -38,11 +38,11 @@ class MessagesController extends Controller
         // ]);
 
         // ELOQUENT
-        Message::create([
-            'nombre' => $request->input('nombre'),
-            'email' => $request->input('email'),
-            'mensaje' => $request->input('mensaje'),
-        ]);
+        $message = Message::create($request->all());
+
+        if (auth()->check()) {
+            auth()->user()->messages()->save($message);
+        }
 
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido tu mensaje');
     }

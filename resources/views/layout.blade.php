@@ -13,7 +13,7 @@
 
     <body>
 
-        <div id="app" class="d-flex flex-column h-screen  justify-content-between">
+        <div id="app" class="d-flex flex-column h-screen justify-content-start">
 
             <header>
                 @include('partials.navbar')
