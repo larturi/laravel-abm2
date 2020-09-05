@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\Providers\MessageWasReceived;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class MessagesController extends Controller
 
     public function index()
     {
-        $messages = Message::all();
+        $messages = Message::with(['user', 'note', 'tags'])->get();
         return view('messages.index', compact('messages'));
     }
 
@@ -43,6 +44,8 @@ class MessagesController extends Controller
         if (auth()->check()) {
             auth()->user()->messages()->save($message);
         }
+
+        event(new MessageWasReceived($message));
 
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido tu mensaje');
     }

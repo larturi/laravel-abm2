@@ -13,6 +13,8 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Mensaje</th>
+                    <th>Notas</th>
+                    <th>Etiquetas</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -39,6 +41,17 @@
                                 {{ $message->mensaje }}
                             </a>
                         </td>
+
+                        <td>
+                               {{ $message->note ? $message->note->body : '' }}
+                        </td>
+
+                        <td>
+                            <span class="badge badge-pill badge-primary">
+                                {{ $message->tags->pluck('name')->implode('') }}
+                            </span>
+                        </td>
+
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ route('mensajes.edit', $message->id) }}">Editar</a>
 

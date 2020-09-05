@@ -12,7 +12,10 @@
 
             <form class="bg-white shadow rounded py-3 px-4" method="POST" action="{{ route('mensajes.update', $message->id) }}">
                 @method('PUT')
-                @include('messages.form', ['btnText' => 'Actualizar'])
+                @include('messages.form', [
+                    'btnText' => 'Actualizar',
+                    'showFields' => !$message->user_id,
+                ])
             </form>
 
 

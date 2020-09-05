@@ -43,6 +43,13 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function note() {
+        return $this->morphOne(Note::class, 'notable');
+    }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
+    }
 
 }

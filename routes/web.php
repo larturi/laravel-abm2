@@ -1,5 +1,9 @@
 <?php
 
+// DB::listen(function($query){
+//     echo "<pre>{$query->sql}</pre>";
+// });
+
 use Illuminate\Support\Facades\Route;
 use App\User;
 use Carbon\Carbon;

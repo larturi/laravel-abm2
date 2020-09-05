@@ -21,7 +21,10 @@
                 <h1 class="mb-4">Contacto</h1>
 
                 <form class="bg-white shadow rounded py-3 px-4" method="POST" action="{{ route('mensajes.store') }}">
-                    @include('messages.form', ['message' => new App\Message])
+                    @include('messages.form', [
+                        'message' => new App\Message,
+                        'showFields' => auth()->guest(),
+                    ])
                 </form>
 
             @endif

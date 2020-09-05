@@ -15,6 +15,8 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Rol</th>
+                    <th>Notas</th>
+                    <th>Etiquetas</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -29,7 +31,19 @@
                        <td>{{ $user->email }}</td>
                        <td>
                               {{ $user->roles->pluck('display_name')->implode(', ') }}
-                        </td>
+                       </td>
+
+                       <td>
+                           @if ($user->note)
+                              {{ $user->note->body }}
+                           @endif
+                       </td>
+
+                       <td>
+                            <span class="badge badge-pill badge-primary">
+                                {{ $user->tags->pluck('name')->implode('') }}
+                            </span>
+                       </td>
 
                        <td>
                             <a class="btn btn-info btn-sm"
