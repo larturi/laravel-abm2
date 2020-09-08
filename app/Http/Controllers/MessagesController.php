@@ -17,7 +17,9 @@ class MessagesController extends Controller
 
     public function index()
     {
-        $messages = Message::with(['user', 'note', 'tags'])->get();
+        $messages = Message::with(['user', 'note', 'tags'])
+            ->orderBy('created_at', request('sorted', 'DESC'))
+            ->paginate(10);
         return view('messages.index', compact('messages'));
     }
 
@@ -40,6 +42,11 @@ class MessagesController extends Controller
 
         // ELOQUENT
         $message = Message::create($request->all());
+
+
+        if ($message->email === null) {
+            $message->email = auth()->user()->email;
+        }
 
         if (auth()->check()) {
             auth()->user()->messages()->save($message);

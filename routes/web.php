@@ -4,9 +4,15 @@
 //     echo "<pre>{$query->sql}</pre>";
 // });
 
+use App\Jobs\SendEmail;
 use Illuminate\Support\Facades\Route;
 use App\User;
 use Carbon\Carbon;
+
+Route::get('job', function() {
+    dispatch(new SendEmail);
+    return "Listo";
+});
 
 /*
 |--------------------------------------------------------------------------
